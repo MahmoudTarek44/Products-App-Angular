@@ -1,0 +1,60 @@
+<div class="cart-table container p-5 bg-light rounded-3">
+  <h1 class="text-center text-success">Products cart</h1>
+  <button
+    (click)="clearCart()"
+    class="clear-cart btn btn-success d-block ms-auto me-5 px-3 mb-5 fs-6"
+  >
+    Clear Cart
+  </button>
+  <table class="table table-hover text-center align-middle rounded-3">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Image</th>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">...</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="currentCount == 0; else cart" class="no-items">
+        <td colspan="6"></td>
+      </tr>
+      <ng-template #cart>
+        <tr
+          *ngFor="let item of purchasedItems; let i = index"
+          class="py-2"
+          #item
+          id="item-{{ i }}"
+        >
+          <th scope="row">{{ i + 1 }}</th>
+          <td><img class="" [src]="item.images[0]" alt="" /></td>
+          <td>{{ item.title }}</td>
+          <td>{{ item.price | currency: "EGP " }}</td>
+          <td>
+            <button (click)="moreQuantity(i)" class="btn btn-info">+</button
+            ><span class="px-2">{{ item.quantity }}</span
+            ><button (click)="lessQuantity(i)" class="btn btn-warning">
+              -
+            </button>
+          </td>
+          <td>
+            <button
+              (click)="removeItem(i, item.quantity!)"
+              class="btn btn-danger"
+            >
+              Remove
+            </button>
+          </td>
+        </tr>
+      </ng-template>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td class="total-value" colspan="4">Total value :</td>
+        <td colspan="2">{{ totalValue | currency: "EGP " }}</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>

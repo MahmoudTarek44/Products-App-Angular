@@ -1,0 +1,66 @@
+<div class="loginContainer">
+  <h2 class="headTitle text-center mb-5 pt-3">Angular Template Driven Form</h2>
+  <form
+    class="container bg-light rounded-1 mx-auto my-6 p-5"
+    #login="ngForm"
+    (ngSubmit)="loginUser(login)"
+  >
+    <div class="mb-3">
+      <label for="email-address" class="form-label">Email address</label>
+      <input
+        type="email"
+        class="form-control"
+        id="form-email"
+        aria-describedby="emailHelp"
+        #email="ngModel"
+        name="email"
+        ngModel
+        required
+        email
+      />
+      <div
+        class="mt-2 py-1 bg-warning rounded-0 text-white col-2 rounded-1"
+        *ngIf="!email.valid && email.touched"
+      >
+        <p class="px-3" *ngIf="email.errors?.['required']">
+          This field is required !
+        </p>
+        <P class="px-3" *ngIf="email.errors?.['email']"
+          >This is not a valid e-mail address !</P
+        >
+      </div>
+      <div id="emailHelp" class="form-text">
+        We'll never share your email with anyone else.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="form-pass"
+        #password="ngModel"
+        name="password"
+        ngModel
+        required
+      />
+      <div
+        class="mt-2 py-1 bg-warning text-white col-2 rounded-1"
+        *ngIf="!password.valid && password.touched"
+      >
+        <p class="px-3" *ngIf="password.errors?.['required']">
+          This field is required !
+        </p>
+      </div>
+    </div>
+    <button [disabled]="!login.valid" type="submit" class="btn btn-primary">
+      Log-In
+    </button>
+  </form>
+</div>
+<div class="mx-auto container col-4 text-center py-4">
+  <p>
+    Don't have account?
+    <a class="text-decoration-none" routerLink="/Auth/register">Register</a>
+  </p>
+</div>

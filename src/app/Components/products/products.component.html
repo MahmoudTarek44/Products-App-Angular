@@ -1,0 +1,18 @@
+<div class="row mx-5 justify-content-between product-list">
+  <div class="row col-9">
+    <app-product
+      class="col-lg-4 col-md-6 col-12 py-2"
+      *ngFor="let data of newProductList"
+      [productData]="data"
+    ></app-product>
+  </div>
+  <app-wish-list class="wish-list col-3"></app-wish-list>
+  <div
+    *ngIf="_loader.ifLoading | async"
+    class="d-flex justify-content-center spin-loader"
+  >
+    <div class="spinner-border position-fixed top-50" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+</div>

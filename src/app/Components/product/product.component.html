@@ -1,0 +1,36 @@
+<div class="bg-white h-100 card">
+  <img [src]="productData.images[1]" class="card-img-top p-3" alt="img" />
+  <div class="card-body">
+    <h5 class="card-title">{{ productData.title.slice(0, 15) + " .." }}</h5>
+    <h6 class="card-category">{{ productData.category["name"] }}</h6>
+    <p class="card-price">{{ productData.price | currency: "EGP " }}</p>
+    <div class="pb-3">
+      <a
+        #item
+        (click)="
+          wishItem(
+            item,
+            productData.images[0],
+            productData.title,
+            productData.id
+          )
+        "
+        type="button"
+        ><i class="fa-solid fa-star pe-2 wishItem"></i
+        ><span class="text-warning">Add to wishlist</span></a
+      >
+    </div>
+
+    <a
+      [routerLink]="['/Products/Product/', productData.id]"
+      class="btn btn-secondary p-2 mb-1 d-block mx-auto"
+      >Product Details</a
+    >
+    <a
+      (click)="purchaseItem(productData)"
+      type="button"
+      class="btn btn-success d-block mx-auto"
+      >Add to Cart</a
+    >
+  </div>
+</div>

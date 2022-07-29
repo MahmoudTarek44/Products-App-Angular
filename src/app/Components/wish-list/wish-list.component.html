@@ -1,0 +1,26 @@
+<div class="card wish-list bg-light py-2 mx-4 position-fixed px-2 w-25">
+  <div
+    class="rounded-pill wish-header px-4 pt-2 mx-2 text-center border-1 border"
+  >
+    <div>
+      <p class="fs-3">
+        WishList : <span class="px-3 fs-4">{{ counter }}</span>
+      </p>
+    </div>
+  </div>
+  <div class="wishes-container" *ngFor="let wish of wishList; let i = index">
+    <div
+      class="row px-3 py-2 m-2 justify-content-between align-items-center rounded-3 wish-item mt-3"
+    >
+      <img class="wish-img col-6" [src]="wish.image" alt="img" />
+      <p class="col-4 w-50 mb-0">{{ wish.title.slice(0, 15) + ".." }}</p>
+      <span class="col-2"
+        ><i
+          (click)="removeFromWish(i)"
+          class="fa-solid fa-xmark text-danger fs-4"
+          type="button"
+        ></i
+      ></span>
+    </div>
+  </div>
+</div>

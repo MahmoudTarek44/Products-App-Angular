@@ -1,0 +1,309 @@
+<div class="regForm container p-5">
+  <h2 class="headTitle text-center mb-5">Angular Reactive Form</h2>
+  <form
+    [formGroup]="RegisterForm"
+    (ngSubmit)="submitForm()"
+    class="col-8 mx-auto p-5 rounded-1 bg-light"
+  >
+    <div class="mb-5">
+      <!-- <label for="email-address" class="form-label">Name</label> -->
+      <input
+        formControlName="name"
+        type="text"
+        class="form-control py-3"
+        id="name-info"
+        aria-describedby="name-info"
+        placeholder="Enter your name"
+      />
+      <div
+        *ngIf="
+          !RegisterForm.controls['name'].valid &&
+          RegisterForm.controls['name'].touched
+        "
+      >
+        <p
+          class="bg-warning text-white col-4 rounded-1 px-3 py-2 mt-2"
+          *ngIf="RegisterForm.controls['name'].errors?.['required']"
+        >
+          This field is required !
+        </p>
+      </div>
+    </div>
+    <div class="mb-5">
+      <!-- <label for="name" class="form-label">Email address</label> -->
+      <input
+        formControlName="email"
+        type="email"
+        class="form-control py-3"
+        id="email-info"
+        aria-describedby="email-info"
+        placeholder="Email-Adress"
+      />
+      <div
+        *ngIf="
+          !RegisterForm.controls['email'].valid &&
+          RegisterForm.controls['email'].touched
+        "
+      >
+        <p
+          class="bg-warning text-white col-4 rounded-1 px-3 py-2 mt-2"
+          *ngIf="RegisterForm.controls['email'].errors?.['required']"
+        >
+          This field is required !
+        </p>
+        <p
+          class="bg-warning text-white col-5 rounded-1 px-3 py-2 mt-2"
+          *ngIf="RegisterForm.controls['email'].errors?.['pattern']"
+        >
+          This is not a valid e-mail address !
+        </p>
+      </div>
+    </div>
+    <div class="mb-5">
+      <!-- <label for="user-name" class="form-label">User Name</label> -->
+      <input
+        formControlName="userName"
+        type="text"
+        class="form-control py-3"
+        id="user-info"
+        aria-describedby="user-info"
+        placeholder="Enter valid user name"
+      />
+      <div
+        *ngIf="
+          !RegisterForm.controls['userName'].valid &&
+          RegisterForm.controls['userName'].touched
+        "
+      >
+        <p
+          class="bg-warning text-white col-4 rounded-1 px-3 py-2 mt-2"
+          *ngIf="RegisterForm.controls['userName'].errors?.['required']"
+        >
+          This field is required !
+        </p>
+        <p
+          class="bg-warning text-white col-5 rounded-1 px-3 py-2 mt-2"
+          *ngIf="RegisterForm.controls['userName'].errors?.['pattern']"
+        >
+          User name must not have spaces !
+        </p>
+      </div>
+    </div>
+    <div class="mb-5">
+      <!-- <label for="password" class="form-label">Password</label> -->
+      <input
+        formControlName="password"
+        name="password"
+        type="password"
+        class="form-control py-3"
+        id="pass-info"
+        placeholder="Password"
+      />
+      <div
+        *ngIf="
+          !RegisterForm.controls['password'].valid &&
+          RegisterForm.controls['password'].touched
+        "
+      >
+        <p
+          class="bg-warning text-white col-4 rounded-1 px-3 py-2 mt-2"
+          *ngIf="RegisterForm.controls['password'].errors?.['required']"
+        >
+          This field is required !
+        </p>
+        <p
+          class="bg-warning text-white col-11 rounded-1 px-3 py-2 mt-2"
+          *ngIf="RegisterForm.controls['password'].errors?.['pattern']"
+        >
+          Password must contain at least one Uppercase, number & special char
+          [@,%,$,#,*] !
+        </p>
+      </div>
+    </div>
+    <div class="mb-5">
+      <!-- <label for="confirm-password" class="form-label">Confirm Password</label> -->
+      <input
+        formControlName="confirmPass"
+        type="password"
+        class="form-control py-3"
+        id="conf-pass-info"
+        placeholder="Confirm Password"
+      />
+      <div
+        *ngIf="
+          !RegisterForm.controls['confirmPass'].valid &&
+          RegisterForm.controls['confirmPass'].touched
+        "
+      >
+        <p
+          class="bg-warning text-white col-4 rounded-1 px-3 py-2 mt-2"
+          *ngIf="RegisterForm.controls['confirmPass'].errors?.['required']"
+        >
+          This field is required !
+        </p>
+        <p
+          class="bg-warning text-white col-8 rounded-1 px-3 py-2 mt-2"
+          *ngIf="
+            RegisterForm.controls['confirmPass'].value !==
+            RegisterForm.controls['password'].value
+          "
+        >
+          Must enter the same password, This one doesn't match !
+        </p>
+      </div>
+    </div>
+    <p>
+      <button (click)="addAddress()" class="d-block ms-auto btn btn-primary">
+        Add Address
+      </button>
+    </p>
+
+    <!-- dynamic array -->
+
+    <div formArrayName="address">
+      <div *ngFor="let address of myAddress.controls; let count = index">
+        <!-- address form -->
+        <form class="row mb-5 border-2 border-danger" [formGroupName]="count">
+          <h3 class="mb-3 text-center">Address number: {{ count + 1 }}</h3>
+          <div class="mb-3 col-6">
+            <label for="address" class="form-label">Address</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="address"
+              name="address"
+            />
+            <div
+              class="warning"
+              *ngIf="
+                !address.get('address')?.valid &&
+                address.get('address')?.touched
+              "
+            >
+              <p
+                class="bg-warning text-white col-8 rounded-1 px-3 py-2 mt-2"
+                *ngIf=" address.get('address')?.errors?.['required']"
+              >
+                This field is required !
+              </p>
+              <p
+                class="bg-warning text-white col-8 rounded-1 px-3 py-2 mt-2"
+                *ngIf=" address.get('address')?.errors?.['pattern']"
+              >
+                Address or Street name doesn't include any special characters !
+              </p>
+            </div>
+          </div>
+          <div class="mb-3 col-6">
+            <label for="address" class="form-label">Street</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="street"
+              name="street"
+            />
+            <div
+              class="warning"
+              *ngIf="
+                !address.get('street')?.valid && address.get('street')?.touched
+              "
+            >
+              <p
+                class="bg-warning text-white col-8 rounded-1 px-3 py-2 mt-2"
+                *ngIf="address.get('street')?.errors?.['required']"
+              >
+                This field is required !
+              </p>
+              <p
+                class="bg-warning text-white col-8 rounded-1 px-3 py-2 mt-2"
+                *ngIf="address.get('street')?.errors?.['pattern']"
+              >
+                Address or Street name doesn't include any special characters !
+              </p>
+            </div>
+          </div>
+          <div class="mb-3 col-6">
+            <label for="address" class="form-label">Country</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="country"
+              name="country"
+            />
+            <div
+              class="warning"
+              *ngIf="
+                !address.get('country')?.valid &&
+                address.get('country')?.touched
+              "
+            >
+              <p
+                class="bg-warning text-white col-8 rounded-1 px-3 py-2 mt-2"
+                *ngIf="address.get('country')?.errors?.['required']"
+              >
+                This field is required !
+              </p>
+              <p
+                class="bg-warning text-white col-8 rounded-1 px-3 py-2 mt-2"
+                *ngIf="address.get('country')?.errors?.['pattern']"
+              >
+                Country or City name doesn't include numbers !
+              </p>
+            </div>
+          </div>
+          <div class="mb-3 col-6">
+            <label for="address" class="form-label">City</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="city"
+              name="city"
+            />
+            <div
+              class="warning"
+              *ngIf="
+                !address.get('city')?.valid && address.get('city')?.touched
+              "
+            >
+              <p
+                class="bg-warning text-white col-8 rounded-1 px-3 py-2 mt-2"
+                *ngIf="address.get('city')?.errors?.['required']"
+              >
+                This field is required !
+              </p>
+              <p
+                class="bg-warning text-white col-8 rounded-1 px-3 py-2 mt-2"
+                *ngIf="address.get('city')?.errors?.['pattern']"
+              >
+                Country or City name doesn't include numbers !
+              </p>
+            </div>
+          </div>
+          <button
+            (click)="removeAddress(count)"
+            type="submit"
+            class="btn btn-danger d-block ms-auto col-2 me-2 mt-4"
+          >
+            Remove
+          </button>
+        </form>
+        <!-- address form end -->
+      </div>
+    </div>
+
+    <button
+      [disabled]="!RegisterForm.valid"
+      type="submit"
+      class="btn btn-success border-1 border-light"
+    >
+      Register
+    </button>
+  </form>
+
+  <div class="mx-auto container col-4 text-center py-4">
+    <p>
+      Don't have account?
+      <a class="text-decoration-none" routerLink="/Auth/login">LogIn</a>
+    </p>
+  </div>
+</div>

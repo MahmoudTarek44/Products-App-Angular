@@ -1,0 +1,25 @@
+.table img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+.no-items {
+  width: 100%;
+  height: 50vh;
+  background-image: url(../../../assets/preview.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.cart-table h1 {
+  font-family: "Satisfy", cursive;
+  font-size: 55px;
+}
+.total-value {
+  font-family: "Satisfy", cursive;
+  font-size: 30px;
+  color: green;
+}
+.cart-table{
+  margin-top: 100px;
+}

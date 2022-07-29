@@ -1,0 +1,25 @@
+<!-- <p>product-details works!</p> -->
+<div class="product-details container p-5" *ngIf="ProductDetails.images">
+  <div class="mx-auto col-9 text-align-center text-center">
+    <h1 class="py-5 mx-auto">{{ ProductDetails.title }}</h1>
+    <figure class="col-6 mx-auto">
+      <img [src]="ProductDetails.images[1]" alt="img" />
+    </figure>
+    <h3>{{ ProductDetails.category["name"] }}</h3>
+    <p class="mx-auto">{{ ProductDetails.description }}</p>
+    <button
+      (click)="purchaseItem(ProductDetails)"
+      class="col-5 d-block mx-auto btn btn-success"
+    >
+      Add To Cart
+    </button>
+  </div>
+</div>
+<div
+  *ngIf="_loader.ifLoading | async"
+  class="d-flex justify-content-center spin-loader"
+>
+  <div class="spinner-border position-fixed top-50" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>

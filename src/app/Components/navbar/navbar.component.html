@@ -1,0 +1,50 @@
+<nav
+  class="navbar navbar-expand-lg bg-dark navbar-dark align-content-center fixed-top"
+>
+  <div class="container">
+    <a class="navbar-brand p-3" routerLink="/Products" routerLinkActive=""
+      >Products</a
+    >
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item px-2">
+          <a
+            class="nav-link active p-3"
+            aria-current="page"
+            routerLink="Products/Cart"
+            ><i class="fa-solid fa-cart-shopping"></i>
+            <span class="px-2">: {{ productsCount }}</span></a
+          >
+        </li>
+        <li class="nav-item px-2">
+          <a
+            routerLinkActive="activeLink"
+            class="nav-link p-3 my-2"
+            aria-current="page"
+            routerLink="/Auth/register"
+            >Register</a
+          >
+        </li>
+        <li class="nav-item px-2">
+          <a
+            routerLinkActive="activeLink"
+            class="nav-link p-3 my-2"
+            routerLink="/Auth/login"
+            >Login</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
